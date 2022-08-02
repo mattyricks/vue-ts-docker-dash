@@ -1,15 +1,32 @@
 <template>
   <main class="form-signin w-100 m-auto">
-    <form>
+    <form @submit.prevent="submit">
       <h1 class="h3 mb-3 fw-normal">Please Register Here</h1>
 
-      <input class="form-control" placeholder="First Name" required />
-
-      <input class="form-control" placeholder="Last Name" required />
-
-      <input type="email" class="form-control" placeholder="Email" required />
+      <input
+        v-model="firstName"
+        class="form-control"
+        placeholder="First Name"
+        required
+      />
 
       <input
+        v-model="lastName"
+        class="form-control"
+        placeholder="Last Name"
+        required
+      />
+
+      <input
+        v-model="email"
+        type="email"
+        class="form-control"
+        placeholder="Email"
+        required
+      />
+
+      <input
+        v-model="password"
         type="password"
         class="form-control"
         placeholder="Password"
@@ -17,6 +34,7 @@
       />
 
       <input
+        v-model="passwordConfirm"
         type="password"
         class="form-control"
         placeholder="Confirm Password"
@@ -29,8 +47,42 @@
 </template>
 
 <script lang="ts">
+import { ref } from "vue";
+
 export default {
   name: "RegisterComponent",
+  setup() {
+    const firstName = ref("");
+    const lastName = ref("");
+    const email = ref("");
+    const password = ref("");
+    const passwordConfirm = ref("");
+
+    const submit = () => {
+      console.log({
+        first_name: firstName.value,
+        last_name: lastName.value,
+        email: email.value,
+        password: password.value,
+        passwordConfirm: passwordConfirm.value,
+      });
+    };
+
+    //     const firstName = ref(value: '')
+    // const lastName = ref(value: '')
+    // const email = ref(value: '')
+    // const password = ref(value: '')
+    // const passwordConfirm = ref(value: '')
+
+    return {
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordConfirm,
+      submit,
+    };
+  },
 };
 </script>
 
