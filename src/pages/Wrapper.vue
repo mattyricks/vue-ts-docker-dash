@@ -15,11 +15,18 @@
 <script lang="ts">
 import NavBar from "@/components/NavBar.vue";
 import SideBar from "@/components/SideBar.vue";
+import axios from "axios";
+import { onMounted } from "vue";
+
 export default {
   name: "WrapperView",
   components: { NavBar, SideBar },
   setup() {
-    return {};
+    onMounted(async () => {
+      const { data } = await axios.get("user");
+
+      console.log(data);
+    });
   },
 };
 </script>
