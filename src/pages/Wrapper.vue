@@ -17,15 +17,22 @@ import NavBar from "@/components/NavBar.vue";
 import SideBar from "@/components/SideBar.vue";
 import axios from "axios";
 import { onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "WrapperView",
   components: { NavBar, SideBar },
   setup() {
-    onMounted(async () => {
-      const { data } = await axios.get("user");
+    const router = useRouter();
 
-      console.log(data);
+    onMounted(async () => {
+      try {
+        const { data } = await axios.get("user");
+
+        console.log(data);
+      } catch (error) {
+        await router.push("/login");
+      }
     });
   },
 };
