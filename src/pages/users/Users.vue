@@ -27,7 +27,7 @@
               <a
                 href="javascript:void(0)"
                 class="btn btn-sm btn-outline btn-secondary"
-                @click="del(user.id)"
+                @click="del(user['id'])"
                 >Delete</a
               >
             </div>
