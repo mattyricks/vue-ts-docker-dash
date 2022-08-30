@@ -16,6 +16,12 @@
             Users
           </router-link>
         </li>
+
+        <li class="nav-item">
+          <router-link to="/roles" active-class="active" class="nav-link">
+            Roles
+          </router-link>
+        </li>
       </ul>
     </div>
   </nav>
