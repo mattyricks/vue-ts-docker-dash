@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Dashboard from '@/pages/Dashboard.vue'
 import Register from '@/pages/Register.vue'
-import Login from '@/pages/Login.vue'
 import Wrapper from '@/pages/Wrapper.vue'
+import Login from '@/pages/Login.vue'
+
 import Users from '@/pages/users/Users.vue'
 import UserCreate from '@/pages/users/UserCreate.vue'
+import UserEdit from '@/pages/users/UserEdit.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +32,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/users/create',
         component: UserCreate,
+      },
+      {
+        path: '/users/:id/edit',
+        component: UserEdit,
       },
     ],
   },

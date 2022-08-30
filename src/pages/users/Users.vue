@@ -24,6 +24,12 @@
           <td>{{ user["role.name"] }}</td>
           <td>
             <div class="btn-group mr-2">
+              <router-link
+                :to="`/users/${user.id}/edit`"
+                class="btn btn-sm btn-outline btn-secondary"
+                >Edit</router-link
+              >
+
               <a
                 href="javascript:void(0)"
                 class="btn btn-sm btn-outline btn-secondary"
