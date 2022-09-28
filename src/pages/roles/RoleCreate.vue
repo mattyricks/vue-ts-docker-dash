@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit">
     <div class="mb-3 mt-3 row">
-      <label for="" class="col-sm-2 col-form-label">Name</label>
+      <label class="col-sm-2 col-form-label">Name</label>
 
       <div class="col-sm-10">
         <input v-model="formData.name" name="name" class="form-control" />
@@ -9,23 +9,21 @@
     </div>
 
     <div class="mb-3 form">
-      <label for="" class="col-sm-2 col-form-label">Permissions</label>
+      <label class="col-sm-2 col-form-label">Permissions</label>
 
       <div class="col-sm-10">
         <div
           v-for="permission in permissionList"
-          :key="permission.id"
+          :key="permission['id']"
           class="form-check form-check-inline col-3"
         >
           <input
-            type="checkbox"
             class="form-check-input"
-            :value="permission.id"
-            @change="select(permission.id, $event.target.checked)"
+            type="checkbox"
+            :value="permission['id']"
+            @change="select(permission['id'], $event.target.checked)"
           />
-          <label for="" class="form-check-label">
-            {{ permission["name"] }}</label
-          >
+          <label class="form-check-label"> {{ permission["name"] }}</label>
         </div>
       </div>
     </div>
@@ -44,7 +42,12 @@ export default {
   setup() {
     const { push } = useRouter();
 
-    const formData = reactive({
+    type FormType = {
+      name: "";
+      permissions: number[];
+    };
+
+    const formData: FormType = reactive({
       name: "",
       permissions: [],
     });
