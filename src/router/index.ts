@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+
 import Dashboard from '@/pages/Dashboard.vue'
 import Register from '@/pages/Register.vue'
 import Wrapper from '@/pages/Wrapper.vue'
@@ -11,6 +12,8 @@ import UserEdit from '@/pages/users/UserEdit.vue'
 import Roles from '@/pages/roles/Roles.vue'
 import RoleCreate from '@/pages/roles/RoleCreate.vue'
 import RoleEdit from '@/pages/roles/RoleEdit.vue'
+
+import Products from '@/pages/products/Products.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -53,6 +56,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/roles/:id/edit',
         component: RoleEdit,
+      },
+      {
+        path: '/products',
+        component: Products,
       },
     ],
   },
