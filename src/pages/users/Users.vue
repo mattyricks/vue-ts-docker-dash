@@ -43,69 +43,42 @@
     </table>
   </div>
 
-  <nav>
-    <ul class="pagination">
-      <li class="page-item">
-        <a href="javascript:void(0)" class="page-link" @click="prev"
-          >Previous</a
-        >
-      </li>
-
-      <li class="page-item">
-        <a href="javascript:void(0)" class="page-link" @click="next">Next</a>
-      </li>
-    </ul>
-  </nav>
+  <paginator :lastPage="lastPage" @page-changed="load($event)" />
 </template>
 
 <script lang="ts" >
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 import { User } from "@/models/user";
+import Paginator from "@/components/Paginator.vue";
 
 export default {
   name: "UsersComponent",
+  components: { Paginator },
   setup() {
     const users = ref([]);
-    const page = ref(1);
     const lastPage = ref(0);
 
-    const load = async () => {
-      const { data } = await axios.get(`users?page=${page.value}`);
-
+    const load = async (page = 1) => {
+      const { data } = await axios.get(`users?page=${page}`);
       users.value = data.data;
       lastPage.value = data.meta.last_page;
     };
 
     onMounted(load);
 
-    watch(page, load);
-
-    const next = async () => {
-      if (page.value < lastPage.value) {
-        page.value++;
-      }
-    };
-
-    const prev = async () => {
-      if (page.value > 1) {
-        page.value--;
-      }
-    };
-
     const del = async (id: number) => {
       if (confirm("Are you sure?")) {
         await axios.delete(`users/${id}`);
       }
-
       users.value = users.value.filter((u: User) => u.id !== id);
     };
 
     return {
       users,
-      next,
-      prev,
+      lastPage,
       del,
+      load,
     };
   },
 };
