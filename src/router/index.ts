@@ -10,6 +10,7 @@ import UserEdit from '@/pages/users/UserEdit.vue'
 
 import Roles from '@/pages/roles/Roles.vue'
 import RoleCreate from '@/pages/roles/RoleCreate.vue'
+import RoleEdit from '@/pages/roles/RoleEdit.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -48,6 +49,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/roles/create',
         component: RoleCreate,
+      },
+      {
+        path: '/roles/:id/edit',
+        component: RoleEdit,
       },
     ],
   },

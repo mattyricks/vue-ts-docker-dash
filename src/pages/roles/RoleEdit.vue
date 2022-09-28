@@ -21,6 +21,7 @@
             class="form-check-input"
             type="checkbox"
             :value="permission['id']"
+            :checked="checked(permission['id'])"
             @change="select(permission['id'], $event.target.checked)"
           />
           <label class="form-check-label"> {{ permission["name"] }}</label>
@@ -35,14 +36,22 @@
 <script lang="ts">
 import { reactive, onMounted, ref } from "vue";
 import axios from "axios";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { Permission } from "@/models/permission";
 
 export default {
   name: "RoleCreate",
   setup() {
     const { push } = useRouter();
 
-    const formData = reactive({
+    const { params } = useRoute();
+
+    type FormType = {
+      name: "";
+      permissions: number[];
+    };
+
+    const formData: FormType = reactive({
       name: "",
       permissions: [] as number[],
     });
@@ -53,6 +62,13 @@ export default {
       const { data } = await axios.get("permissions");
 
       permissionList.value = data;
+
+      const response = await axios.get(`/roles/${params.id}`);
+
+      formData.name = response.data.name;
+      formData.permissions = response.data.permissions.map(
+        (p: Permission) => p.id
+      );
     });
 
     const select = (id: number, checked: boolean) => {
@@ -65,16 +81,19 @@ export default {
     };
 
     const submit = async () => {
-      await axios.post("roles", formData);
+      await axios.put(`/roles/${params.id}`, formData);
 
       await push("/roles");
     };
+
+    const checked = (id: number) => formData.permissions.some((p) => p === id);
 
     return {
       formData,
       permissionList,
       select,
       submit,
+      checked,
     };
   },
 };
