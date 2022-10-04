@@ -23,7 +23,7 @@
           <td>
             <div class="btn-group mr-2">
               <router-link
-                :to="`/roles/${role.id}/edit`"
+                :to="`/roles/${role['id']}/edit`"
                 class="btn btn-sm btn-outline btn-secondary"
                 >Edit</router-link
               >
@@ -71,6 +71,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

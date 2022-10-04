@@ -1,4 +1,10 @@
 <template>
+  <div class="pt-3 pb-2 mb-3 border-bottom">
+    <router-link to="/products/create" class="btn btn-sm btn-outline-secondary"
+      >Add</router-link
+    >
+  </div>
+
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -42,7 +48,7 @@
     </table>
   </div>
 
-  <Paginator :lastPage="lastPage" @page-changed="load($event)" />
+  <Paginator :last-page="lastPage" @page-changed="load($event)" />
 </template>
 
 <script lang="ts">
@@ -53,7 +59,9 @@ import Paginator from "@/components/Paginator.vue";
 
 export default {
   name: "ProductsComponent",
+
   components: { Paginator },
+
   setup() {
     const products = ref([]);
     const lastPage = ref(0);

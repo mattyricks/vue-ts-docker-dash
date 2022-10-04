@@ -25,7 +25,7 @@
           <td>
             <div class="btn-group mr-2">
               <router-link
-                :to="`/users/${user.id}/edit`"
+                :to="`/users/${user['id']}/edit`"
                 class="btn btn-sm btn-outline btn-secondary"
                 >Edit</router-link
               >
@@ -43,7 +43,7 @@
     </table>
   </div>
 
-  <paginator :lastPage="lastPage" @page-changed="load($event)" />
+  <Paginator :last-page="lastPage" @page-changed="load($event)" />
 </template>
 
 <script lang="ts" >

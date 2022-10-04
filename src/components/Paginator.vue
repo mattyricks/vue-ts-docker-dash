@@ -15,30 +15,26 @@
 </template>
 
 <script lang="ts">
-import { ref, watch, SetupContext } from "@vue/runtime-core";
+import { ref, watch, SetupContext } from "vue";
 export default {
   name: "PaginatorComponent",
   emits: ["page-changed"],
   props: {
     lastPage: Number,
   },
-  setup(props: { lastPage: number }, context: SetupContext) {
+  setup(props: { lastPage: number | any }, context: SetupContext) {
     const page = ref(1);
 
     watch(page, () => {
       context.emit("page-changed", page.value);
     });
 
-    const next = async () => {
-      if (page.value < props.lastPage) {
-        page.value++;
-      }
+    const next = () => {
+      if (page.value < props.lastPage) page.value++;
     };
 
-    const prev = async () => {
-      if (page.value > 1) {
-        page.value--;
-      }
+    const prev = () => {
+      if (page.value > 1) page.value--;
     };
 
     return {
@@ -49,5 +45,31 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+
+<!-- <script lang="ts">
+import { ref, SetupContext } from "vue";
+export default {
+  name: "PaginatorComponent",
+  emits: ["page-changed"],
+  props: {
+    lastPage: Number,
+  },
+  setup(props: { lastPage: number }, ctx: SetupContext) {
+    const page = ref(1);
+    const next = () => {
+      if (page.value === props.lastPage) return;
+      page.value++;
+      ctx.emit("page-changed", page.value);
+    };
+    const prev = () => {
+      if (page.value === 1) return;
+      page.value--;
+      ctx.emit("page-changed", page.value);
+    };
+    return {
+      next,
+      prev,
+    };
+  },
+};
+</script> -->
